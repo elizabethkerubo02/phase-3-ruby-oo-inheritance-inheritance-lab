@@ -1,20 +1,25 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/user"
-require_relative "../lib/teacher"
-require_relative "../lib/student"
+require_relative '../lib/student'
+require_relative '../lib/teacher'
+require_relative '../lib/user'
+
+jim = User.new
+jim.first_name = "Jim"
+jim.last_name = "Smith"
+
+# Calling `#learn` on `jim` will raise a NoMethodError since `jim` is an instance of the `User` class,
+# and the `#learn` method is specific to the `Student` class.
 
 steve = Student.new
-steve.first_name = "Steve"
-steve.last_name = "Jobs"
-
 avi = Teacher.new
-avi.first_name = "Avi"
-avi.last_name = "Flombaum"
 
+avi.teach(steve)
+avi.teach(steve)
 
-some_knowledge = avi.teach 
+new_student = Student.new
+avi.teach(new_student)
+avi.teach(new_student)
 
-steve.learn(some_knowledge)
-
-puts "Steve just learned this important knowledge: '#{steve.knowledge.first}' from Avi"
+puts "Existing knowledge of Steve: #{steve.knowledge}"
+puts "Existing knowledge of the new student: #{new_student.knowledge}"
